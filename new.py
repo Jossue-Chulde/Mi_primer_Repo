@@ -1,7 +1,2 @@
-# Nuevo de ejemplo
-
-print("El segundo archivo a verficar")
-
-print("otro cambio")
-
-print("Rama 2")
+numero = 1 + 1
+print("Rama 2:" , numero)

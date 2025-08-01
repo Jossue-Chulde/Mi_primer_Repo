@@ -15,7 +15,9 @@ def escribir_archivo(nombre_archivo, datos):
         archivo.close()
 
 
-
+#! LOGIN ###
+Admin_Usuario = "admin@gmail.com"
+Admin_contrasena = "Admin123"
 
 def login():
     print("=== POLI TOURS ===")
@@ -48,7 +50,42 @@ def validar_contrasena(password):
 
 #! MENU PRINCIPAL ####
 
+rutas_iniciales = {}
 
+def main():
+    print("PoliTours")
+    if not os.path.exists("usuarios.txt"):
+        usuarios_iniciales = ["Admin,Sistema,0000000000,30,admin@politours.com,Admin123"]
+        escribir_archivo("usuarios.txt", usuarios_iniciales)
+
+    while True:
+        print("\n=== MENÚ PRINCIPAL ===")
+        print("1. Login Cliente")
+        print("2. Registro")
+        print("3. Login Admin")
+        print("4. Salir")
+
+        opcion = input("Opción: ")
+
+        if opcion == "1":
+            usuario = login()
+            if usuario and usuario[4] != "admin@politours.com":
+                menu_usuario(usuario)
+
+        elif opcion == "2":
+            registrar()
+
+        elif opcion == "3":
+            email = input("Email admin: ")
+            password = input("Password admin: ")
+            if email == "admin@politours.com" and password == "Admin123":
+                menu_administrador()
+            else:
+                print("Datos incorrectos")
+
+        elif opcion == "4":
+            print("Saliendo del sistema")
+            break
 
 #! MENU DE REGISTROS ####
 def registrar():
@@ -393,7 +430,38 @@ def guardar_itinerario(usuario, mis_ciudades):
 
 #! MENUS ###
 
-
+def menu_administrador():
+    while True:
+        print("\n=== Menu Administrador ===")
+        print("1. Agregar Nueva Ciudad/Punto Turistico")
+        print("2. Listar Ciudades/Puntos Turisticos")
+        print("3. Consultar Ciudad/Punto Turistico")
+        print("4. Actualizar Ciudad/Punto Turistico")
+        print("5. Eliminar Ciudad/Punto Turistico")
+        print("6. Guardar Ciudad/Punto Turistico")
+        print("7. Salir del Programa")
+        try:
+            opcion = int(input("Seleccione una Opción: "))
+            if opcion == 1:
+                agregar_ruta()
+            elif opcion == 2:
+                ver_rutas()
+            elif opcion == 3:
+                buscar_ruta()
+            elif opcion == 4:
+                actualizar_ruta()
+            elif opcion == 5:
+                eliminar_ruta()
+            elif opcion == 6:
+                print("Falta")              
+            elif opcion == 7:
+                print("Saliendo del Menu de Administrador")
+                break
+            else:
+                print("Opción no válida")
+        except ValueError:
+            print("Solo digite un numero")
+            continue  
 
 def menu_usuario():
     while True:
